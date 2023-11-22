@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -39,9 +40,6 @@ app.get("/get-moisture-data", async (req, res) => {
     res.send("ERROR");
   }
 });
-
-const mongoose = require("mongoose");
-const { MinKey } = require("mongodb");
 
 mongoose
   .connect(

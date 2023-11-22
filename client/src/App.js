@@ -23,30 +23,32 @@ function App() {
   });
 
   const getData = () => {
-    axios.get("http://localhost:5000/get-moisture-data").then((res) => {
-      let labels = [];
-      let data = [];
-      res.data.forEach((element) => {
-        labels.push(element.timeStamp);
-        data.push(element.moisture);
+    axios
+      .get(process.env.REACT_BACKEND_URL + "/get-moisture-data")
+      .then((res) => {
+        let labels = [];
+        let data = [];
+        res.data.forEach((element) => {
+          labels.push(element.timeStamp);
+          data.push(element.moisture);
+        });
+        setData({
+          labels: labels,
+          datasets: [
+            {
+              label: "moisture",
+              data: data,
+              backgroundColor: [
+                "rgba(75,192,192,1)",
+                "#ecf0f1",
+                "#50AF95",
+                "#f3ba2f",
+                "#2a71d0",
+              ],
+            },
+          ],
+        });
       });
-      setData({
-        labels: labels,
-        datasets: [
-          {
-            label: "moisture",
-            data: data,
-            backgroundColor: [
-              "rgba(75,192,192,1)",
-              "#ecf0f1",
-              "#50AF95",
-              "#f3ba2f",
-              "#2a71d0",
-            ],
-          },
-        ],
-      });
-    });
   };
 
   useEffect(() => {
